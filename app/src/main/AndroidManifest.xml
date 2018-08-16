@@ -12,7 +12,10 @@
         <activity android:name=".MainActivity">
         </activity>
 
-        <activity android:name=".SplashScreen" >
+=======
+        <activity android:name=".SplashScreen">
+
+>>>>>>> 68caa384dc941dd9950d53da37c1684277a1636b
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
