@@ -1,20 +1,18 @@
 package com.example.bienestaraprendiz.emparejapp.Entidades;
 
-import android.widget.ImageView;
-
 public class parejasVo {
-    ImageView imagen;
+    int imagen;
     boolean vuelta;
     public parejasVo(int imagen, boolean vuelta){
         this.imagen=imagen;
         this.vuelta=vuelta;
     }
 
-    public ImageView getImagen() {
+    public int getImagen() {
         return imagen;
     }
 
-    public void setImagen(ImageView imagen) {
+    public void setImagen(int imagen) {
         this.imagen = imagen;
     }
 

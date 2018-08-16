@@ -50,9 +50,7 @@ public class Juego extends AppCompatActivity {
             int n = random.nextInt(3) + 0;
             int contador=0;
             for (int i = 0; i < j; i++) {
-                if (juega.get(i) !=parejas.get(n).getImagen() || contador==2){
-                    juega.add(parejas.get(n).getImagen());
-                }
+
             }
             j++;
         }
