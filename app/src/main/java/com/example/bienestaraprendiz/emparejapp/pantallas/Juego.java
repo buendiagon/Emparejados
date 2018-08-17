@@ -14,29 +14,50 @@ import java.util.Random;
 
 public class Juego extends AppCompatActivity {
     TextView Player1,Player2,Puntaje1,Puntaje2;
-    ImageView ima1,ima2,ima3,ima4,ima5,ima6,ima7,ima8;
+    ImageView ima1,ima2,ima3,ima4,ima5,ima6,ima7,ima8,ima9,ima10,ima11,ima12,ima13,ima14,ima15,ima16;
     ArrayList<parejasVo> parejas;
     ArrayList<Integer> juega;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_juego);
+        int nivel=getIntent().getIntExtra("nivel",0);
+        if(nivel==1){
+            setContentView(R.layout.activity_juego);
+        }
+        else if(nivel==2){
+            setContentView(R.layout.medio);
+            ima9=findViewById(R.id.imagen9);
+            ima10=findViewById(R.id.imagen10);
+            ima11=findViewById(R.id.imagen11);
+            ima12=findViewById(R.id.imagen12);
+        }
+        else {
+            setContentView(R.layout.dificil);
+            ima9=findViewById(R.id.imagen9);
+            ima10=findViewById(R.id.imagen10);
+            ima11=findViewById(R.id.imagen11);
+            ima12=findViewById(R.id.imagen12);
+            ima13=findViewById(R.id.imagen13);
+            ima14=findViewById(R.id.imagen14);
+            ima15=findViewById(R.id.imagen15);
+            ima16=findViewById(R.id.imagen16);
+        }
         parejas= new ArrayList<>();
         juega= new ArrayList<>();
         Player1=findViewById(R.id.player1Id);
         Player2=findViewById(R.id.player2Id);
         Puntaje1=findViewById(R.id.puntaje1Id);
         Puntaje2=findViewById(R.id.puntaje2Id);
-        parejas.add(new parejasVo(R.drawable.descarga,false));
-        parejas.add(new parejasVo(R.drawable.descarga1,false));
-        parejas.add(new parejasVo(R.drawable.descarga2,false));
-        parejas.add(new parejasVo(R.drawable.descarga3,false));
-        parejas.add(new parejasVo(R.drawable.descarga4,false));
-        parejas.add(new parejasVo(R.drawable.descarga5,false));
-        parejas.add(new parejasVo(R.drawable.descarga6,false));
-        parejas.add(new parejasVo(R.drawable.descarga7,false));
-        parejas.add(new parejasVo(R.drawable.ic_launcher_background,false));
+        juega.add(R.drawable.descarga);
+        juega.add(R.drawable.descarga1);
+        juega.add(R.drawable.descarga2);
+        juega.add(R.drawable.descarga3);
+        juega.add(R.drawable.descarga4);
+        juega.add(R.drawable.descarga5);
+        juega.add(R.drawable.descarga6);
+        juega.add(R.drawable.descarga7);
+        juega.add(R.drawable.espada);
         ima1=findViewById(R.id.imagen1);
         ima2=findViewById(R.id.imagen2);
         ima3=findViewById(R.id.imagen3);
@@ -45,30 +66,45 @@ public class Juego extends AppCompatActivity {
         ima6=findViewById(R.id.imagen6);
         ima7=findViewById(R.id.imagen7);
         ima8=findViewById(R.id.imagen8);
-        Tarjetas(1);
-        llenarTarjetas();
+        Tarjetas(nivel);
+        llenarTarjetas(nivel);
 
     }
 
-    private void llenarTarjetas() {
-        ima1.setImageResource(juega.get(0));
-        ima2.setImageResource(juega.get(1));
-        ima3.setImageResource(juega.get(2));
-        ima4.setImageResource(juega.get(3));
-        ima5.setImageResource(juega.get(4));
-        ima6.setImageResource(juega.get(5));
-        ima7.setImageResource(juega.get(6));
-        ima8.setImageResource(juega.get(7));
+    private void llenarTarjetas(int nivel) {
+        ima1.setImageResource(parejas.get(0).getImagen());
+        ima2.setImageResource(parejas.get(1).getImagen());
+        ima3.setImageResource(parejas.get(2).getImagen());
+        ima4.setImageResource(parejas.get(3).getImagen());
+        ima5.setImageResource(parejas.get(4).getImagen());
+        ima6.setImageResource(parejas.get(5).getImagen());
+        ima7.setImageResource(parejas.get(6).getImagen());
+        ima8.setImageResource(parejas.get(7).getImagen());
+        if(nivel==2){
+            ima9.setImageResource(parejas.get(8).getImagen());
+            ima10.setImageResource(parejas.get(9).getImagen());
+            ima11.setImageResource(parejas.get(10).getImagen());
+            ima12.setImageResource(parejas.get(11).getImagen());
+        }
+        else if(nivel==3){
+            ima13.setImageResource(parejas.get(12).getImagen());
+            ima14.setImageResource(parejas.get(13).getImagen());
+            ima15.setImageResource(parejas.get(14).getImagen());
+            ima16.setImageResource(parejas.get(15).getImagen());
+            ima9.setImageResource(parejas.get(8).getImagen());
+            ima10.setImageResource(parejas.get(9).getImagen());
+            ima11.setImageResource(parejas.get(10).getImagen());
+            ima12.setImageResource(parejas.get(11).getImagen());
+        }
     }
 
     private void Tarjetas(int nivel) {
         for(int z=0;z<16;z++){
-            juega.add(parejas.get(8).getImagen());
+            parejas.add(z,new parejasVo(R.drawable.espada,false));
         }
         Random rnd=new Random(System.currentTimeMillis());
         int cartas=0;
         int aleatorio=0;
-        //cambiar drawable
         if(nivel==1){
             aleatorio=8;
             cartas=4;
@@ -82,14 +118,13 @@ public class Juego extends AppCompatActivity {
             cartas=8;
         }
         for (int i=0;i<cartas;i++){
-            int n=rnd.nextInt(aleatorio-1)+0;
+            int n=rnd.nextInt(aleatorio)+0;
             for(int j=0;j<2;j++) {
-                while (juega.get(n) != parejas.get(8).getImagen()) {
-                    n = rnd.nextInt(aleatorio-1)+0;
+                while (juega.get(8) != parejas.get(n).getImagen()) {
+                    n = rnd.nextInt(aleatorio)+0;
 
                 }
-                juega.add(n,parejas.get(i).getImagen());
-                Toast.makeText(getApplicationContext(),"carta:"+i+" en "+String.valueOf(n),Toast.LENGTH_SHORT).show();
+                parejas.set(n,new parejasVo(juega.get(i),false));
             }
         }
     }

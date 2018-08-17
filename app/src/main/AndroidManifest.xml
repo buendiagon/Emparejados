@@ -9,26 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
-
-=======
+        <activity android:name=".MainActivity"></activity>
+        =======
         <activity android:name=".SplashScreen">
-
->>>>>>> 68caa384dc941dd9950d53da37c1684277a1636b
-        </activity>
-
-
-        <activity android:name=".names"></activity>
-=======
-        <activity android:name=".pantallas.Juego">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            >>>>>>> 68caa384dc941dd9950d53da37c1684277a1636b
         </activity>
->>>>>>> 4a1dac8c647040a6d783319f07ed3af47853b13d
+        <activity android:name=".names" />
+        =======
+        <activity android:name=".pantallas.Juego">
+        </activity>
+        >>>>>>> 4a1dac8c647040a6d783319f07ed3af47853b13d
+        <activity android:name=".pantallas.Nivel"></activity>
     </application>
 
 </manifest>
