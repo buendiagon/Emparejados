@@ -2,6 +2,8 @@ package com.example.bienestaraprendiz.emparejapp.pantallas;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,31 +19,36 @@ public class Juego extends AppCompatActivity {
     ImageView ima1,ima2,ima3,ima4,ima5,ima6,ima7,ima8,ima9,ima10,ima11,ima12,ima13,ima14,ima15,ima16;
     ArrayList<parejasVo> parejas;
     ArrayList<Integer> juega;
+    ArrayList<Integer> voltea;
+    ArrayList<Integer> voltea1;
+    int click=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int nivel=getIntent().getIntExtra("nivel",0);
+        voltea=new ArrayList<>();
+        voltea1=new ArrayList<>();
         if(nivel==1){
             setContentView(R.layout.activity_juego);
         }
         else if(nivel==2){
             setContentView(R.layout.medio);
-            ima9=findViewById(R.id.imagen9);
-            ima10=findViewById(R.id.imagen10);
-            ima11=findViewById(R.id.imagen11);
-            ima12=findViewById(R.id.imagen12);
+            voltea.add((ima9=findViewById(R.id.imagen9)).getId());
+            voltea.add((ima10=findViewById(R.id.imagen10)).getId());
+            voltea.add((ima11=findViewById(R.id.imagen11)).getId());
+            voltea.add((ima12=findViewById(R.id.imagen12)).getId());
         }
         else {
             setContentView(R.layout.dificil);
-            ima9=findViewById(R.id.imagen9);
-            ima10=findViewById(R.id.imagen10);
-            ima11=findViewById(R.id.imagen11);
-            ima12=findViewById(R.id.imagen12);
-            ima13=findViewById(R.id.imagen13);
-            ima14=findViewById(R.id.imagen14);
-            ima15=findViewById(R.id.imagen15);
-            ima16=findViewById(R.id.imagen16);
+            voltea1.add((ima9=findViewById(R.id.imagen9)).getId());
+            voltea1.add((ima10=findViewById(R.id.imagen10)).getId());
+            voltea1.add((ima11=findViewById(R.id.imagen11)).getId());
+            voltea1.add((ima12=findViewById(R.id.imagen12)).getId());
+            voltea1.add((ima13=findViewById(R.id.imagen13)).getId());
+            voltea1.add((ima14=findViewById(R.id.imagen14)).getId());
+            voltea1.add((ima15=findViewById(R.id.imagen15)).getId());
+            voltea1.add((ima16=findViewById(R.id.imagen16)).getId());
         }
         parejas= new ArrayList<>();
         juega= new ArrayList<>();
@@ -58,43 +65,83 @@ public class Juego extends AppCompatActivity {
         juega.add(R.drawable.descarga6);
         juega.add(R.drawable.descarga7);
         juega.add(R.drawable.espada);
-        ima1=findViewById(R.id.imagen1);
-        ima2=findViewById(R.id.imagen2);
-        ima3=findViewById(R.id.imagen3);
-        ima4=findViewById(R.id.imagen4);
-        ima5=findViewById(R.id.imagen5);
-        ima6=findViewById(R.id.imagen6);
-        ima7=findViewById(R.id.imagen7);
-        ima8=findViewById(R.id.imagen8);
+        juega.add((ima1=findViewById(R.id.imagen1)).getId());
+        juega.add((ima2=findViewById(R.id.imagen2)).getId());
+        juega.add((ima3=findViewById(R.id.imagen3)).getId());
+        juega.add((ima4=findViewById(R.id.imagen4)).getId());
+        juega.add((ima5=findViewById(R.id.imagen5)).getId());
+        juega.add((ima6=findViewById(R.id.imagen6)).getId());
+        juega.add((ima7=findViewById(R.id.imagen7)).getId());
+        juega.add((ima8=findViewById(R.id.imagen8)).getId());
         Tarjetas(nivel);
-        llenarTarjetas(nivel);
+        if(click==2){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            llenarTarjetas(nivel);
+            click=0;
+        }
 
     }
 
+
     private void llenarTarjetas(int nivel) {
-        ima1.setImageResource(parejas.get(0).getImagen());
-        ima2.setImageResource(parejas.get(1).getImagen());
-        ima3.setImageResource(parejas.get(2).getImagen());
-        ima4.setImageResource(parejas.get(3).getImagen());
-        ima5.setImageResource(parejas.get(4).getImagen());
-        ima6.setImageResource(parejas.get(5).getImagen());
-        ima7.setImageResource(parejas.get(6).getImagen());
-        ima8.setImageResource(parejas.get(7).getImagen());
+        ima1.setImageResource(juega.get(8));
+        ima2.setImageResource(juega.get(8));
+        ima3.setImageResource(juega.get(8));
+        ima4.setImageResource(juega.get(8));
+        ima5.setImageResource(juega.get(8));
+        ima6.setImageResource(juega.get(8));
+        ima7.setImageResource(juega.get(8));
+        ima8.setImageResource(juega.get(8));
         if(nivel==2){
-            ima9.setImageResource(parejas.get(8).getImagen());
-            ima10.setImageResource(parejas.get(9).getImagen());
-            ima11.setImageResource(parejas.get(10).getImagen());
-            ima12.setImageResource(parejas.get(11).getImagen());
+            ima9.setImageResource(juega.get(8));
+            ima10.setImageResource(juega.get(8));
+            ima11.setImageResource(juega.get(8));
+            ima12.setImageResource(juega.get(8));
         }
         else if(nivel==3){
-            ima13.setImageResource(parejas.get(12).getImagen());
-            ima14.setImageResource(parejas.get(13).getImagen());
-            ima15.setImageResource(parejas.get(14).getImagen());
-            ima16.setImageResource(parejas.get(15).getImagen());
-            ima9.setImageResource(parejas.get(8).getImagen());
-            ima10.setImageResource(parejas.get(9).getImagen());
-            ima11.setImageResource(parejas.get(10).getImagen());
-            ima12.setImageResource(parejas.get(11).getImagen());
+            ima9.setImageResource(juega.get(8));
+            ima10.setImageResource(juega.get(8));
+            ima11.setImageResource(juega.get(8));
+            ima12.setImageResource(juega.get(8));
+            ima13.setImageResource(juega.get(8));
+            ima14.setImageResource(juega.get(8));
+            ima15.setImageResource(juega.get(8));
+            ima16.setImageResource(juega.get(8));
+        }
+    }
+    public void voltear(View view) throws InterruptedException {
+        ImageView imagen;
+        int id=view.getId();
+        int nivel=getIntent().getIntExtra("nivel",0);;
+        for(int i=9;i<17;i++){
+            if(id==juega.get(i)){
+                imagen=view.findViewById(id);
+                imagen.setImageResource(parejas.get(i-9).getImagen());
+                click++;
+            }
+        }
+        if(!voltea.isEmpty()){
+            for(int i=0;i<4;i++){
+                if(voltea.get(i)==id) {
+                    imagen = view.findViewById(id);
+                    imagen.setImageResource(parejas.get(i+8).getImagen());
+                    click++;
+                }
+            }
+        }
+
+        if(!voltea1.isEmpty()){
+            for(int i=0;i<8;i++){
+                if(voltea1.get(i)==id) {
+                    imagen = view.findViewById(id);
+                    imagen.setImageResource(parejas.get(i+8).getImagen());
+                    click++;
+                }
+            }
         }
     }
 

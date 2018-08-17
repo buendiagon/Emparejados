@@ -81,8 +81,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
         <ImageView
             android:id="@+id/imagen2"
@@ -90,8 +91,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
         <ImageView
             android:id="@+id/imagen9"
@@ -99,8 +101,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
     </LinearLayout>
 
     <LinearLayout
@@ -115,8 +118,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
         <ImageView
             android:id="@+id/imagen4"
@@ -124,8 +128,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
         <ImageView
             android:id="@+id/imagen10"
@@ -133,8 +138,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
     </LinearLayout>
 
@@ -150,8 +156,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
         <ImageView
             android:id="@+id/imagen6"
@@ -159,8 +166,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
         <ImageView
             android:id="@+id/imagen11"
@@ -168,8 +176,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
     </LinearLayout>
 
     <LinearLayout
@@ -184,8 +193,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
         <ImageView
             android:id="@+id/imagen8"
@@ -193,8 +203,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
 
         <ImageView
             android:id="@+id/imagen12"
@@ -202,8 +213,9 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:onClick="voltear"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/espada" />
     </LinearLayout>
 
 </LinearLayout>
