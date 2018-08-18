@@ -2,6 +2,7 @@ package com.example.bienestaraprendiz.emparejapp.pantallas;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,20 +24,20 @@ public class Juego extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
         parejas= new ArrayList<>();
-        juega= new ArrayList<>();
+        juega= new ArrayList<Integer>();
         Player1=findViewById(R.id.player1Id);
         Player2=findViewById(R.id.player2Id);
         Puntaje1=findViewById(R.id.puntaje1Id);
         Puntaje2=findViewById(R.id.puntaje2Id);
-        parejas.add(new parejasVo(R.drawable.descarga,false));
-        parejas.add(new parejasVo(R.drawable.descarga1,false));
-        parejas.add(new parejasVo(R.drawable.descarga2,false));
-        parejas.add(new parejasVo(R.drawable.descarga3,false));
-        parejas.add(new parejasVo(R.drawable.descarga4,false));
-        parejas.add(new parejasVo(R.drawable.descarga5,false));
-        parejas.add(new parejasVo(R.drawable.descarga6,false));
-        parejas.add(new parejasVo(R.drawable.descarga7,false));
-        parejas.add(new parejasVo(R.drawable.ic_launcher_background,false));
+        parejas.add(0,new parejasVo(R.drawable.descarga,false));
+        parejas.add(1,new parejasVo(R.drawable.descarga1,false));
+        parejas.add(2,new parejasVo(R.drawable.descarga2,false));
+        parejas.add(3,new parejasVo(R.drawable.descarga3,false));
+        parejas.add(4,new parejasVo(R.drawable.descarga4,false));
+        parejas.add(5,new parejasVo(R.drawable.descarga5,false));
+        parejas.add(6,new parejasVo(R.drawable.descarga6,false));
+        parejas.add(7,new parejasVo(R.drawable.descarga7,false));
+        parejas.add(8,new parejasVo(R.drawable.espada,false));
         ima1=findViewById(R.id.imagen1);
         ima2=findViewById(R.id.imagen2);
         ima3=findViewById(R.id.imagen3);
@@ -62,8 +63,9 @@ public class Juego extends AppCompatActivity {
     }
 
     private void Tarjetas(int nivel) {
+        juega=new ArrayList<>();
         for(int z=0;z<16;z++){
-            juega.add(parejas.get(8).getImagen());
+            juega.add(Integer.valueOf(parejas.get(8).getImagen()));
         }
         Random rnd=new Random(System.currentTimeMillis());
         int cartas=0;
@@ -82,15 +84,16 @@ public class Juego extends AppCompatActivity {
             cartas=8;
         }
         for (int i=0;i<cartas;i++){
-            int n=rnd.nextInt(aleatorio-1)+0;
+            int n=rnd.nextInt(aleatorio)+0;
             for(int j=0;j<2;j++) {
-                while (juega.get(n) != parejas.get(8).getImagen()) {
-                    n = rnd.nextInt(aleatorio-1)+0;
-
+                while (!juega.get(n).equals(parejas.get(8).getImagen())) {
+                    n = rnd.nextInt(aleatorio)+0;
                 }
-                juega.add(n,parejas.get(i).getImagen());
-                Toast.makeText(getApplicationContext(),"carta:"+i+" en "+String.valueOf(n),Toast.LENGTH_SHORT).show();
+
+                juega.set(n,parejas.get(i).getImagen());
+                Log.d("Juego", "carta:"+String.valueOf(parejas.get(i).getImagen())+" en "+n);
             }
+            //Toast.makeText(getApplicationContext(),"carta:"+juega.get(n).toString()+" en "+String.valueOf(parejas.get(i).getImagen()),Toast.LENGTH_SHORT).show();
         }
     }
 }
