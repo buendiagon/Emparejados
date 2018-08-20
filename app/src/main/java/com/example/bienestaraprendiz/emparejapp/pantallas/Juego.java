@@ -175,25 +175,35 @@ public class Juego extends AppCompatActivity {
                     click=0;
                     if(parejas==maximo/2){
                         ContentValues registro=new ContentValues();
-                        ArrayList<PuntajesVo> puntajes=new ArrayList<>();
-                        puntaje.consultar(Juego.this,"select * from tb_puntaje",puntajes);
-                        for(int i=0;i<5;i++){
-                            Log.d("Punta",String.valueOf(puntajes.get(i*max).getPuntaje()));
-                            if(Integer.valueOf(Puntaje1.getText().toString())>=puntajes.get(i*(max)).getPuntaje()){
-                                registro.put("nombre",Player1.getText().toString());
-                                registro.put("puntaje",Puntaje1.getText().toString());
-                                puntaje.modificar(Juego.this,registro,String.valueOf((i*(max)+1)));
-                                for (int j=i;j<5;j++){
-                                    registro.put("nombre",puntajes.get(i*(max)).getNombre());
-                                    registro.put("puntaje",puntajes.get(i*max).getPuntaje());
-                                    if(i!=4*max){
-                                        puntaje.modificar(Juego.this,registro,String.valueOf((i*(max)+2)));
+                        ContentValues registro1=new ContentValues();
+                        TextView Player3=Player1;
+                        TextView Puntaje3=Puntaje1;
+                        for (int z=0;z<2;z++){
+                            ArrayList<PuntajesVo> puntajes=new ArrayList<>();
+                            puntaje.consultar(Juego.this,"select * from tb_puntaje",puntajes);
+                            for(int i=1;i<=5;i++){
+                                Log.d("Punta",Puntaje3.getText().toString()+"      "+String.valueOf(puntajes.get(i+((max-1)*5)-1).getPuntaje()));
+                                if(Integer.valueOf(Puntaje3.getText().toString())>=puntajes.get(i+((max-1)*5)-1).getPuntaje()){
+                                    registro.put("nombre",Player3.getText().toString());
+                                    registro.put("puntaje",Puntaje3.getText().toString());
+                                    for (int j=i;j<5;j++){
+                                        registro1.put("nombre",puntajes.get(j+((max-1)*5)-1).getNombre());
+                                        registro1.put("puntaje",puntajes.get(j+((max-1)*5)-1).getPuntaje());
+                                        puntaje.modificar(Juego.this,registro1,String.valueOf(((j+(max-1)*5)+1)));
                                     }
+                                    puntaje.modificar(Juego.this,registro,String.valueOf(i+((max-1)*5)));
+                                    break;
                                 }
-                                break;
                             }
+                            Player3=Player2;
+                            Puntaje3=Puntaje2;
                         }
-                        Toast.makeText(getApplicationContext(),"Has ganado",Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(Juego.this,Resultados.class);
+                        intent.putExtra("player1",Player1.getText());
+                        intent.putExtra("puntaje1",Puntaje1.getText());
+                        intent.putExtra("player2",Player2.getText());
+                        intent.putExtra("puntaje2",Puntaje2.getText());
+                        startActivity(intent);
                     }
                 }
             },1000);

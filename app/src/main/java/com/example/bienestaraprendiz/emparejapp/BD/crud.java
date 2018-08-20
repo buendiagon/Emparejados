@@ -51,7 +51,6 @@ public class crud extends SQLiteOpenHelper {
         SQLiteDatabase db=admin.getWritableDatabase();
         int exito=db.update("tb_puntaje",registro,"id="+id,null);
         if(exito==1){
-            Toast.makeText(context,"bien",Toast.LENGTH_SHORT).show();
             return 1;
         }
         else Toast.makeText(context,"mal",Toast.LENGTH_SHORT).show(); return 0;
