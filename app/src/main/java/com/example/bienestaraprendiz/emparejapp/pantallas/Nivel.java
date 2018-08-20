@@ -17,10 +17,14 @@ public class Nivel extends AppCompatActivity {
         facil=findViewById(R.id.facilId);
         medio=findViewById(R.id.medioId);
         dificil=findViewById(R.id.dificilId);
+        String player1=getIntent().getStringExtra("player1");
+        String player2=getIntent().getStringExtra("player2");
+        final Intent intent=new Intent(Nivel.this,Juego.class);
+        intent.putExtra("player1",player1);
+        intent.putExtra("player2",player2);
         facil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Nivel.this,Juego.class);
                 int nivel=1;
                 intent.putExtra("nivel",nivel);
                 startActivity(intent);
@@ -29,7 +33,6 @@ public class Nivel extends AppCompatActivity {
         medio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Nivel.this,Juego.class);
                 int nivel=2;
                 intent.putExtra("nivel",nivel);
                 startActivity(intent);
@@ -38,7 +41,6 @@ public class Nivel extends AppCompatActivity {
         dificil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Nivel.this,Juego.class);
                 int nivel=3;
                 intent.putExtra("nivel",nivel);
                 startActivity(intent);

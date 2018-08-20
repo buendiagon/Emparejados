@@ -1,5 +1,8 @@
 package com.example.bienestaraprendiz.emparejapp.pantallas;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bienestaraprendiz.emparejapp.BD.crud;
+import com.example.bienestaraprendiz.emparejapp.Entidades.PuntajesVo;
 import com.example.bienestaraprendiz.emparejapp.Entidades.listaVo;
 import com.example.bienestaraprendiz.emparejapp.Entidades.parejasVo;
 import com.example.bienestaraprendiz.emparejapp.R;
@@ -22,15 +27,18 @@ public class Juego extends AppCompatActivity {
     ArrayList<parejasVo> parejas;
     ArrayList<listaVo> juega;
     ArrayList<Integer> juego;
-    int click=0,pareja=0;
-    int anterior=0;
-    int verificar=0;
+    int ran=0;
+    int click=0,pareja=0,anterior=0,verificar=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         juega= new ArrayList<>();
-        int nivel=getIntent().getIntExtra("nivel",0);if(nivel==1){
+        int nivel=getIntent().getIntExtra("nivel",0);
+        String jugador1=getIntent().getStringExtra("player1");
+        String jugador2=getIntent().getStringExtra("player2");
+        Random persona=new Random(System.currentTimeMillis());
+        if(nivel==1){
             setContentView(R.layout.activity_juego);
         }
         else if(nivel==2){
@@ -42,13 +50,25 @@ public class Juego extends AppCompatActivity {
             juega.add(new listaVo((ima9=findViewById(R.id.imagen9)).getId(),nivel));juega.add(new listaVo((ima10=findViewById(R.id.imagen10)).getId(),nivel));juega.add(new listaVo((ima11=findViewById(R.id.imagen11)).getId(),nivel));juega.add(new listaVo((ima12=findViewById(R.id.imagen12)).getId(),nivel));
             juega.add(new listaVo((ima13=findViewById(R.id.imagen13)).getId(),nivel));juega.add(new listaVo((ima14=findViewById(R.id.imagen14)).getId(),nivel));juega.add(new listaVo((ima15=findViewById(R.id.imagen15)).getId(),nivel));juega.add(new listaVo((ima16=findViewById(R.id.imagen16)).getId(),nivel));
         }
-
+        ran=persona.nextInt(2)+1;
         parejas= new ArrayList<>();
         juego=new ArrayList<>();
         Player1=findViewById(R.id.player1Id);
         Player2=findViewById(R.id.player2Id);
         Puntaje1=findViewById(R.id.puntaje1Id);
         Puntaje2=findViewById(R.id.puntaje2Id);
+        if(ran==1){
+            Player1.setTextColor(Color.parseColor("#000000"));
+            Puntaje1.setTextColor(Color.parseColor("#000000"));
+        }else {
+            Player2.setTextColor(Color.parseColor("#000000"));
+            Puntaje2.setTextColor(Color.parseColor("#000000"));
+        }
+        Player1.setText(jugador1);
+        Player2.setText(jugador2);
+        Puntaje1.setText("0");
+        Puntaje2.setText("0");
+
         parejas.add(0,new parejasVo(R.drawable.descarga,false));parejas.add(1,new parejasVo(R.drawable.descarga1,false));parejas.add(2,new parejasVo(R.drawable.descarga2,false));parejas.add(3,new parejasVo(R.drawable.descarga3,false));parejas.add(4,new parejasVo(R.drawable.descarga4,false));
         parejas.add(5,new parejasVo(R.drawable.descarga5,false));parejas.add(6,new parejasVo(R.drawable.descarga6,false));parejas.add(7,new parejasVo(R.drawable.descarga7,false));parejas.add(8,new parejasVo(R.drawable.espada,false));
         juega.add(new listaVo((ima1=findViewById(R.id.imagen1)).getId(),nivel));juega.add(new listaVo((ima2=findViewById(R.id.imagen2)).getId(),nivel));juega.add(new listaVo((ima3=findViewById(R.id.imagen3)).getId(),nivel));juega.add(new listaVo((ima4=findViewById(R.id.imagen4)).getId(),nivel));
@@ -118,7 +138,10 @@ public class Juego extends AppCompatActivity {
             }
         }
         if(click==2){
+            final int parejas=pareja;
+            final int maximo=maxi;
             final int finalSi = si;
+            final crud puntaje =new crud(this,"emparejados",null,1);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -126,16 +149,54 @@ public class Juego extends AppCompatActivity {
                     if(finalSi==1){
                         findViewById(view.getId()).setVisibility(view.INVISIBLE);
                         findViewById(anterior1).setVisibility(view.INVISIBLE);
+                        if(ran==1){
+                            Puntaje1.setText(String.valueOf(Integer.valueOf((String) Puntaje1.getText())+100));
+                        }else Puntaje2.setText(String.valueOf(Integer.valueOf((String) Puntaje2.getText())+100));
+                    }else {
+
+                        if(ran==1){
+                            Puntaje1.setText(String.valueOf(Integer.valueOf((String) Puntaje1.getText())-5));
+                            ran=2;
+                            Player1.setTextColor(Color.parseColor("#808080"));
+                            Puntaje1.setTextColor(Color.parseColor("#808080"));
+                            Player2.setTextColor(Color.parseColor("#000000"));
+                            Puntaje2.setTextColor(Color.parseColor("#000000"));
+                        }else{
+                            Puntaje2.setText(String.valueOf(Integer.valueOf((String) Puntaje2.getText())-5));
+                            ran=1;
+                            Player2.setTextColor(Color.parseColor("#808080"));
+                            Puntaje2.setTextColor(Color.parseColor("#808080"));
+                            Player1.setTextColor(Color.parseColor("#000000"));
+                            Puntaje1.setTextColor(Color.parseColor("#000000"));
+                        }
                     }
                     llenarTarjetas(max);
                     verificar=0;
                     click=0;
+                    if(parejas==maximo/2){
+                        ContentValues registro=new ContentValues();
+                        ArrayList<PuntajesVo> puntajes=new ArrayList<>();
+                        puntaje.consultar(Juego.this,"select * from tb_puntaje",puntajes);
+                        for(int i=0;i<5;i++){
+                            Log.d("Punta",String.valueOf(puntajes.get(i*max).getPuntaje()));
+                            if(Integer.valueOf(Puntaje1.getText().toString())>=puntajes.get(i*(max)).getPuntaje()){
+                                registro.put("nombre",Player1.getText().toString());
+                                registro.put("puntaje",Puntaje1.getText().toString());
+                                puntaje.modificar(Juego.this,registro,String.valueOf((i*(max)+1)));
+                                for (int j=i;j<5;j++){
+                                    registro.put("nombre",puntajes.get(i*(max)).getNombre());
+                                    registro.put("puntaje",puntajes.get(i*max).getPuntaje());
+                                    if(i!=4*max){
+                                        puntaje.modificar(Juego.this,registro,String.valueOf((i*(max)+2)));
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        Toast.makeText(getApplicationContext(),"Has ganado",Toast.LENGTH_SHORT).show();
+                    }
                 }
             },1000);
-            Log.d("juego",String.valueOf(pareja));
-            if(pareja==maxi/2){
-                Toast.makeText(getApplicationContext(),"Has ganado",Toast.LENGTH_SHORT).show();
-            }
         }
 
     }

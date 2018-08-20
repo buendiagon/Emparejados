@@ -1,5 +1,6 @@
 package com.example.bienestaraprendiz.emparejapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.bienestaraprendiz.emparejapp.BD.crud;
+import com.example.bienestaraprendiz.emparejapp.pantallas.Juego;
 
 public class names extends AppCompatActivity {
     Button ingresar;
@@ -18,6 +22,7 @@ public class names extends AppCompatActivity {
         ingresar=findViewById(R.id.ingresar);
         name1 = findViewById(R.id.name1);
         name2 = findViewById(R.id.name2);
+        final crud crear=new crud(this,"emparejados",null, 1);
 
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +31,8 @@ public class names extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Ingrese el nombre por favor",Toast.LENGTH_SHORT).show();
                 }else{
                     Intent intent=new Intent(names.this,MainActivity.class);
+                    intent.putExtra("player1",name1.getText().toString());
+                    intent.putExtra("player2",name2.getText().toString());
                     startActivity(intent);
                 }
             }
