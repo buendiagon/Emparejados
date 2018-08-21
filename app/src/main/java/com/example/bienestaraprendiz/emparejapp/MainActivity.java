@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.bienestaraprendiz.emparejapp.pantallas.AltosPuntajes;
 import com.example.bienestaraprendiz.emparejapp.pantallas.Nivel;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         puntaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //puntaje
+                Intent intent =new Intent(MainActivity.this, AltosPuntajes.class);
+                startActivity(intent);
             }
         });
         configuracion.setOnClickListener(new View.OnClickListener() {
