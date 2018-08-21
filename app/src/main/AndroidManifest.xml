@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         =======
         <activity android:name=".SplashScreen">
             <intent-filter>
@@ -21,10 +21,11 @@
         </activity>
         <activity android:name=".names" />
         =======
-        <activity android:name=".pantallas.Juego">
-        </activity>
+        <activity android:name=".pantallas.Juego" />
         >>>>>>> 4a1dac8c647040a6d783319f07ed3af47853b13d
-        <activity android:name=".pantallas.Nivel"></activity>
+        <activity android:name=".pantallas.Nivel" />
+        <activity android:name=".pantallas.Resultados" />
+        <activity android:name=".pantallas.AltosPuntajes"></activity>
     </application>
 
 </manifest>

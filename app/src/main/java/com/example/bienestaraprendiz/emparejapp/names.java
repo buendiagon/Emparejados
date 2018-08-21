@@ -1,6 +1,10 @@
 package com.example.bienestaraprendiz.emparejapp;
 
+<<<<<<< HEAD
 import android.content.DialogInterface;
+=======
+import android.content.ContentValues;
+>>>>>>> ffb51d23abc891bbe8af2ff06cd9540bbc3a03c6
 import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
@@ -13,7 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import java.lang.reflect.Array;
+=======
+import com.example.bienestaraprendiz.emparejapp.BD.crud;
+import com.example.bienestaraprendiz.emparejapp.pantallas.Juego;
+>>>>>>> ffb51d23abc891bbe8af2ff06cd9540bbc3a03c6
 
 public class names extends AppCompatActivity {
     Button ingresar,iniciar,pausar,reiniciar,temporizador;
@@ -33,6 +42,7 @@ public class names extends AppCompatActivity {
         ingresar=findViewById(R.id.ingresar);
         name1 = findViewById(R.id.name1);
         name2 = findViewById(R.id.name2);
+<<<<<<< HEAD
         iniciar = findViewById(R.id.iniciar);
         pausar = findViewById(R.id.pausar);
         reiniciar = findViewById(R.id.reiniciar);
@@ -68,6 +78,9 @@ public class names extends AppCompatActivity {
                 reiniciarchronometro();
             }
         });
+=======
+        final crud crear=new crud(this,"emparejados",null, 1);
+>>>>>>> ffb51d23abc891bbe8af2ff06cd9540bbc3a03c6
 
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +89,8 @@ public class names extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Ingrese el nombre por favor",Toast.LENGTH_SHORT).show();
                 }else{
                     Intent intent=new Intent(names.this,MainActivity.class);
+                    intent.putExtra("player1",name1.getText().toString());
+                    intent.putExtra("player2",name2.getText().toString());
                     startActivity(intent);
                 }
             }
